@@ -30,9 +30,6 @@ signals:
     void frameCaptured(cv::Mat *data);
 
 private:
-    void detectObjects(cv::Mat &frame);
-
-private:
     bool running;
     int cameraID;
     int algorithmID;

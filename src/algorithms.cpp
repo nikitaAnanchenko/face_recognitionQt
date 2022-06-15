@@ -1,4 +1,4 @@
-#include "algorithms.h"
+#include "include/algorithms.h"
 #include <QDebug>
 #include <ctime>
 #include <cstdlib>
@@ -210,8 +210,8 @@ void Algorithms::eigenFaceTrainer() {
     qDebug() << "Training begins....";
 
     //create algorithm eigenface recognizer
-    Ptr<EigenFaceRecognizer> model = EigenFaceRecognizer::create();
-
+    //Ptr<EigenFaceRecognizer> model = EigenFaceRecognizer::create();
+    Ptr<LBPHFaceRecognizer> model = LBPHFaceRecognizer::create();
     //train data
     model->train(images, labels);
     string eigenfaceName = "//home/nikita/diplom/object_recognize/resources/dataset/eigenface.yml";
@@ -238,7 +238,7 @@ static string check_name(int label){
     return person;
 }
 
-Mat Algorithms::FaceRecognition(Mat frame, CascadeClassifier face_cascade, Ptr<FaceRecognizer> model) {
+Mat Algorithms::FaceRecognition(Mat frame, CascadeClassifier face_cascade, Ptr<LBPHFaceRecognizer> model) {
     string sampleName = "/home/nikita/diplom/object_recognize/resources/dataset/0.jpg";
     Mat testSample = imread(sampleName, 0);
 

@@ -24,7 +24,7 @@ class Algorithms
    Mat haarFace(Mat frame, CascadeClassifier cascade);
    Mat addFace(Mat frame, string name, CascadeClassifier face_cascade);
    void eigenFaceTrainer();
-   Mat FaceRecognition(Mat frame, CascadeClassifier face_cascade, Ptr<FaceRecognizer> model);
+   Mat FaceRecognition(Mat frame, CascadeClassifier face_cascade, Ptr<LBPHFaceRecognizer> model);
  private:
    static void drawPolyline(Mat &im, const vector<Point2f> &landmarks, const int start, const int end, bool isClosed = false);
    static void drawLandmarks(Mat &im, vector<Point2f> &landmarks);

@@ -9,8 +9,8 @@
 #include "opencv2/imgproc.hpp"
 #include "opencv2/videoio.hpp"
 
-#include "capture.h"
-#include "algorithms.h"
+#include "include/capture.h"
+#include "include/algorithms.h"
 
 namespace global {
     double fps = 0;
@@ -46,15 +46,15 @@ void Capture::run() {
 
     CascadeClassifier face_cascade, eyes_cascade, lbp_cascade;
     Ptr<Facemark> facemark;
-    Ptr<FaceRecognizer> model;
-
+    //Ptr<FaceRecognizer> model;
+    Ptr<LBPHFaceRecognizer> model;
     init_cascade(&face_cascade, &eyes_cascade, &lbp_cascade);
     if(algorithmID == 1){
         facemark = FacemarkLBF::create();
         facemark->loadModel("/home/nikita/diplom/object_recognize/resources/lbf/lbfmodel.yaml");
     }
     else if(algorithmID == 5){
-        model = FisherFaceRecognizer::create();
+        model = LBPHFaceRecognizer::create();
         string eigenfaceName = "/home/nikita/diplom/object_recognize/resources/dataset/eigenface.yml";
         model->read(eigenfaceName);
     }
@@ -97,6 +97,7 @@ void Capture::run() {
             alg->eigenFaceTrainer();
             global::addToDatabase = true;
             emit frameCaptured(&frame);
+            count = 0;
             break;
         }
         emit frameCaptured(&frame);
